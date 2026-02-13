@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Best Electronics Deals | Compare & Buy</title>
+<meta name="description" content="Compare best electronics deals with price and ratings. Buy directly from Amazon.">
+
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f2f3f5;
+}
+
+/* HEADER */
+header {
+  background: #131921;
+  color: #fff;
+  padding: 18px;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* FILTER */
+.filter-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.filter-bar select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* PRODUCT GRID */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ff9900;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
+
+/* IMAGE */
+.card img {
+  width: 160px;
+  height: auto;
+  margin: 10px 0;
+}
+
+/* TITLE */
+.card h3 {
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: center;
+  color: #111;
+}
+
+/* RATING */
+.rating {
+  color: #ffa41c;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* PRICE */
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 6px 0 12px;
+  color: #b12704;
+}
+
+/* BUTTON */
+.buy-btn {
+  margin-top: auto;
+  width: 100%;
+  background: #ffd814;
+  border: 1px solid #fcd200;
+  color: #111;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.buy-btn:hover {
+  background: #f7ca00;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Best Electronics Deals</h1>
+  <p>Compare top-rated gadgets & buy at the best price</p>
+</header>
+
+<div class="container">
+
+  <div class="filter-bar">
+    <select onchange="filterProducts(this.value)">
+      <option value="default">Sort By</option>
+      <option value="priceLow">Price: Low to High</option>
+      <option value="ratingHigh">Rating: High to Low</option>
+    </select>
+  </div>
+
+  <div class="products" id="productCards"></div>
+</div>
+
+<footer>
+  © 2026 Deals Store • Affiliate Disclosure: As an Amazon Associate, we earn from qualifying purchases.
+</footer>
+
+<script>
+let products = [
+  {
+    asin: 'B0XXXXX1',
+    title: 'Smart Bluetooth Headphones',
+    price: 1399,
+    rating: 4.0,
+    reviews: 1245,
+    top: true,
+    link: 'https://amzn.to/4artMH5'
+  },
+  {
+    asin: 'B0XXXXX2',
+    title: 'Noise Cancelling Earbuds',
+    price: 2499,
+    rating: 4.3,
+    reviews: 980,
+    top: false,
+    link: 'https://www.amazon.in/dp/B0XXXXX2?tag=yourtag-21'
+  }
+];
+
+function renderProducts(list = products) {
+  const el = document.getElementById("productCards");
+  el.innerHTML = "";
+
+  list.forEach(p => {
+    const img = `https://images-na.ssl-images-amazon.com/images/P/${p.asin}.01._SX300_.jpg`;
+
+    el.innerHTML += `
+      <div class="card">
+        ${p.top ? `<div class="badge">Top Pick</div>` : ``}
+        <img src="${img}" alt="${p.title}">
+        <h3>${p.title}</h3>
+        <div class="rating">⭐ ${p.rating} (${p.reviews})</div>
+        <div class="price">₹${p.price}</div>
+        <a class="buy-btn" href="${p.link}" target="_blank">Buy on Amazon</a>
+      </div>
+    `;
+  });
+}
+
+function filterProducts(type) {
+  let sorted = [...products];
+  if (type === "priceLow") sorted.sort((a,b) => a.price - b.price);
+  if (type === "ratingHigh") sorted.sort((a,b) => b.rating - a.rating);
+  renderProducts(sorted);
+}
+
+renderProducts();
+</script>
+
+</body>
+</html>

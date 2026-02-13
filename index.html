@@ -125,7 +125,6 @@ header p {
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.2s;
 }
 .buy-btn:hover {
   background: #f7ca00;
@@ -166,33 +165,44 @@ footer {
 </footer>
 
 <script>
+/* =========================
+   EDIT ONLY THIS SECTION
+   ========================= */
+
 let products = [
   {
-    asin: 'B0XXXXX1',
-    title: 'Smart Bluetooth Headphones',
+    asin: "B0XXXXX1",
+    title: "Noise Pulse 2 Pro [New Launch] 1.8" Vibrant Display, Bluetooth Calling Smart Watch for Men & Women, 7 Days Battery Life, Metallic Finish, Built-in Games, Voice Assistance, Health Suite (Elite Black)
+",
+    image: "https://m.media-amazon.com/images/I/61Gc2c+TuCL._SL1500_.jpg", // custom image (optional)
     price: 1399,
     rating: 4.0,
-    reviews: 1245,
+    reviews: 3924,
     top: true,
-    link: 'https://amzn.to/4artMH5'
+    link: "https://amzn.to/4artMH5"
   },
   {
-    asin: 'B0XXXXX2',
-    title: 'Noise Cancelling Earbuds',
-    price: 2499,
-    rating: 4.3,
-    reviews: 980,
-    top: false,
-    link: 'https://www.amazon.in/dp/B0XXXXX2?tag=yourtag-21'
+    asin: "B0XXXXX2",
+    title: "mi Smart Watch for Kids Women Boys Men Girls ID116 Phone Watch Wrist Activity Tracker All Android and iOS Devices",
+    image: "https://m.media-amazon.com/images/I/51N0T-6X-zL.jpg", // empty = Amazon image auto-load
+    price: 439,
+    rating: 3.6,
+    reviews: 33,
+    top: true,
+    link: "https://amzn.to/3M8GS4b"
   }
 ];
+
+/* ========================= */
 
 function renderProducts(list = products) {
   const el = document.getElementById("productCards");
   el.innerHTML = "";
 
   list.forEach(p => {
-    const img = `https://images-na.ssl-images-amazon.com/images/P/${p.asin}.01._SX300_.jpg`;
+    const img = (p.image && p.image.trim() !== "")
+      ? p.image
+      : `https://images-na.ssl-images-amazon.com/images/P/${p.asin}.01._SX300_.jpg`;
 
     el.innerHTML += `
       <div class="card">
